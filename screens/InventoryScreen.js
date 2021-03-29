@@ -4,18 +4,7 @@ import { FontAwesome } from "@expo/vector-icons";
 
 export default function InventoryScreen({ navigation, route }) {
   
-  const [inventory, setInventory] = useState([
-    {
-      id: 0,
-      name: "Jia Chen",
-      count: 10,
-    },
-    {
-      id: 1,
-      name: "Sebastian",
-      count: 1,
-    },
-  ]);
+  const [inventory, setInventory] = useState([]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -31,6 +20,7 @@ export default function InventoryScreen({ navigation, route }) {
     if (route.params?.newItem) {
       const newItem = {...route.params?.newItem, id: inventory.length}
       setInventory([...inventory, newItem])
+      console.log(inventory)
     }
   }, [route.params?.newItem])
 
@@ -41,9 +31,12 @@ export default function InventoryScreen({ navigation, route }) {
   function renderInventory({ item }) {
     return (
       <View style={styles.list}>
-        <Text style={styles.title}>
-          {item.name}
-        </Text>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Image source={{uri: item.uri}} style={{ width: 50, height: 50 }}/>
+          <Text style={styles.title}>
+            {item.name}
+          </Text>
+        </View>
         <Text style={styles.count}>
           {item.count}
         </Text>
@@ -75,6 +68,7 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 20,
+    marginLeft: 10
   }, 
   count: {
     fontSize: 20,

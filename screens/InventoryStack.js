@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import InventoryScreen from './InventoryScreen';
 import AddScreen from './AddScreen';
+import CameraScreen from './CameraScreen';
 
 const InnerStack =  createStackNavigator();
 
@@ -24,6 +25,7 @@ export default function InventoryStack(){
         },
       }}/>
       <InnerStack.Screen name="Add" component={AddScreen} options={{ headerShown: false}}/>
+      <InnerStack.Screen name="Camera" component={CameraScreen} options={{ headerShown: false }}/>
     </InnerStack.Navigator>
   );
 }
