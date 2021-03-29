@@ -4,10 +4,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import InventoryStack from './screens/InventoryStack';
 import SettingsStack from './screens/SettingsStack';
 import { FontAwesome } from '@expo/vector-icons';
+import { Provider } from 'react-redux';
+import store from './redux/configureStore';
 
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+function App() {
 
   return (
     <NavigationContainer>
@@ -33,4 +35,12 @@ export default function App() {
       </Tab.Navigator>
     </NavigationContainer>
   );
+};
+
+export default function AppWrapper() {
+  return (
+    <Provider store={store}>
+      <App/>
+    </Provider>
+  )
 }
