@@ -1,21 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import InventoryStack from './screens/InventoryStack';
+import SettingsStack from './screens/SettingsStack';
+import { FontAwesome } from '@expo/vector-icons';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            switch (route.name){
+              case "Inventory":
+                iconName = "inbox"
+                break
+              case "Settings":
+                iconName = "gear"
+                break
+            }
+
+            // You can return any component that you like here!
+            return <FontAwesome name={iconName} size={size} color={color} />;
+          },
+        })}>
+        <Tab.Screen name="Inventory" component={InventoryStack}/>
+        <Tab.Screen name="Settings" component={SettingsStack}/>
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
